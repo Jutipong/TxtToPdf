@@ -21,12 +21,14 @@ namespace ConsoleApp1
         {
             using (FileStream fs = new FileStream(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), pathOutput), FileMode.Create, FileAccess.Write, FileShare.Read))
             {
+                var docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 var Doc = new Document(PageSize.A4.Rotate());
                 var writer = PdfWriter.GetInstance(Doc, fs);
                 Doc.Open();
                 Doc.NewPage();
-                var ARIALUNI_TFF = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "tahoma.TTF");
-                var baseFont = BaseFont.CreateFont(ARIALUNI_TFF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                var fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "tahoma.TTF");
+                //var fontPath = Path.Combine(Directory.GetCurrentDirectory(), "THSarabunNew.TTF");
+                var baseFont = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
                 var font = new Font(baseFont, 8, Font.NORMAL);
                 //using (var str = new StreamReader(pathInput, Encoding.UTF8))
                 using (var str = new StreamReader(pathInput, Encoding.GetEncoding("windows-874")))
